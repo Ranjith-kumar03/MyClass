@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Add New Student"
+        android:icon="@drawable/newstudent"
+        android:id="@+id/addNewStudent"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+    <item android:title="Get Student"
+        android:icon="@drawable/newstudent"
+        android:id="@+id/getStudent"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item android:title="Exit the Application"
+        android:icon="@drawable/exit"
+        android:id="@+id/Exit"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+
+
+
+
+</menu>
