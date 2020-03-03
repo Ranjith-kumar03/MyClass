@@ -70,7 +70,8 @@ public class StudentDetailFragment extends Fragment {
                 cancelbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        getFragmentManager().beginTransaction().remove(StudentDetailFragment.this).commit();
+                        GetStudentFragment getStudentFragment=new GetStudentFragment();
+                        getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,getStudentFragment).commit();
                     }
                 });
 

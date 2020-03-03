@@ -27,6 +27,7 @@ public class UpdateStudentFragment extends Fragment {
     Student student=new Student();
     TextInputEditText updateage,updatesex,updatedate;
     EditText updatename;
+    TextView updaterollID;
     Button updatebutton,cancelbutton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +45,7 @@ public class UpdateStudentFragment extends Fragment {
         updateage= view.findViewById(R.id.updateage);
         updatesex= view.findViewById(R.id.updatesex);
         updatedate= view.findViewById(R.id.updatedate);
+        updaterollID= view.findViewById(R.id.updaterollID);
         updatebutton= view.findViewById(R.id.updatebutton);
         cancelbutton= view.findViewById(R.id.cancelbutton);
 
@@ -51,6 +53,11 @@ public class UpdateStudentFragment extends Fragment {
             @Override
             public void callBackData(Student response) {
                 student=response;
+                updaterollID.setText("You are Updating Roll Number : "+Integer.toString(response.getRollnumber())+" Details");
+                updatename.setText(response.getName().toString());
+                updateage.setText(Integer.toString(response.getAge()));
+                updatesex.setText(response.getSex().toString());
+                updatedate.setText(response.getDate().toString());
 
                 updatebutton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -75,6 +82,8 @@ public class UpdateStudentFragment extends Fragment {
                                 @Override
                                 public void callBackData(Student response) {
                                     Toast.makeText(getContext(), response.getName() + " details are updated", Toast.LENGTH_SHORT).show();
+                                    GetStudentFragment getStudentFragment=new GetStudentFragment();
+                                    getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,getStudentFragment).commit();
                                 }
 
                                 @Override
@@ -82,6 +91,7 @@ public class UpdateStudentFragment extends Fragment {
                                     Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }).execute();
+
 
                         }
                     }
@@ -99,7 +109,8 @@ public class UpdateStudentFragment extends Fragment {
         cancelbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentManager().beginTransaction().remove(UpdateStudentFragment.this).commit();
+                GetStudentFragment getStudentFragment=new GetStudentFragment();
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,getStudentFragment).commit();
             }
         });
 
