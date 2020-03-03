@@ -33,7 +33,9 @@ final static String TAG=MainActivity.class.getSimpleName();
         actionBar.setTitle("    My Tution Class ");
         actionBar.setIcon(R.drawable.students);
         actionBar.setDisplayUseLogoEnabled(true);
-
+        GetStudentFragment getStudent=new GetStudentFragment();
+        fragmentTransaction=manager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainer, getStudent).commit();
 
     }
 
@@ -59,13 +61,7 @@ final static String TAG=MainActivity.class.getSimpleName();
                 fragmentTransaction.commit();
                 break;
 
-            case R.id.getStudent:
 
-                fragmentTransaction.replace(R.id.fragmentContainer,getStudent);
-                fragmentTransaction.commit();
-
-
-                break;
             case R.id.Exit:
                 finish();
                 moveTaskToBack(true);

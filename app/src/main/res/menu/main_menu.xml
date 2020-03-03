@@ -8,12 +8,7 @@
         android:orderInCategory="100"
         app:showAsAction="never"/>
 
-    <item android:title="Get Student"
-        android:icon="@drawable/newstudent"
-        android:id="@+id/getStudent"
-        android:orderInCategory="100"
-        app:showAsAction="never"/>
-    <item android:title="Exit the Application"
+        <item android:title="Exit the Application"
         android:icon="@drawable/exit"
         android:id="@+id/Exit"
         android:orderInCategory="100"

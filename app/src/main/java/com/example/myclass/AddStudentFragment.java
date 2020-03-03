@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -24,9 +26,10 @@ import com.google.android.material.textfield.TextInputEditText;
 public class AddStudentFragment extends Fragment {
 
     View view;
-    TextInputEditText addname,addage,addsex,adddate;
+    TextInputEditText addname,addage,adddate;
     Button addbutton;
     GetStudentFragment getStudent=new GetStudentFragment();
+    AutoCompleteTextView addsex;
 
 
     @Override
@@ -46,6 +49,12 @@ public class AddStudentFragment extends Fragment {
         addsex=view.findViewById(R.id.addsex);
         adddate=view.findViewById(R.id.adddate);
         addbutton=view.findViewById(R.id.addbutton);
+        String [] gender={"Male","Female","DoesNotWantToIdentify"};
+        ArrayAdapter<String> adapter;
+        adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1, gender);
+        addsex.setThreshold(1);
+        addsex.setAdapter(adapter);
+
 
        final Student  student=new Student();
         addbutton.setOnClickListener(new View.OnClickListener() {
