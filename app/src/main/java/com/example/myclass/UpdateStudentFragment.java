@@ -28,6 +28,7 @@ import java.util.Calendar;
 
 
 public class UpdateStudentFragment extends Fragment {
+    private static final String TAG = "UpdateStudentFragment";
     View view;
     int cursel;
     Student student=new Student();
@@ -65,7 +66,7 @@ public class UpdateStudentFragment extends Fragment {
 
 
         new GetStudentByIDAsync(getActivity(), cursel, new callBackInteface<Student>() {
-            private static final String TAG = "UpdateStudentFragment";
+
             @Override
             public void callBackData(Student response) {
                 student=response;
@@ -77,64 +78,6 @@ public class UpdateStudentFragment extends Fragment {
                 studentData.setTime(curTime);
                 timedisplay.setText(studentData.getTime());
                 studentData.setStudentId(response.getRollnumber());
-
-
-                updatebutton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(updatename.getText().toString().isEmpty()||updateage.getText().toString().isEmpty()||updatesex.getText().toString().isEmpty()||updatedate.getText().toString().isEmpty()) {
-
-                            Toast.makeText(getContext(), "Please Make Sure you enter all the fields", Toast.LENGTH_SHORT).show();
-
-                        }else
-                        {
-
-                            student.setName(updatename.getText().toString());
-                            student.setAge(Integer.parseInt(updateage.getText().toString()));
-                            student.setSex(updatesex.getText().toString());
-                            student.setDate(updatedate.getText().toString());
-                            studentData.setData(updateNotes.getText().toString());
-
-                            Log.d("UpdateStudentAsync", student.getName());
-                            Log.d("UpdateStudentAsync", Integer.toString(student.getAge()));
-                            Log.d("UpdateStudentAsync", student.getSex());
-                            Log.d("UpdateStudentAsync", Integer.toString(student.getRollnumber()));
-                            new UpdateStudentAsync(getActivity(), student, new callBackInteface<Student>() {
-                                @Override
-                                public void callBackData(Student response) {
-                                    Toast.makeText(getContext(), response.getName() + " details are updated", Toast.LENGTH_SHORT).show();
-                                    GetStudentFragment getStudentFragment=new GetStudentFragment();
-                                    new CreateAsynchStudentDataUpdate(getActivity(), studentData, new callBackInterfaceUpdateStudentData<StudentData>() {
-                                        @Override
-                                        public void callBackStudentData(StudentData response) {
-                                           // Toast.makeText(getContext(),"Student Roll Number : "+ " Notes Updated : "+ response.getData(), Toast.LENGTH_SHORT).show();
-                                            Log.d(TAG, "onPostExecute: "+response.getStudentId());
-                                            Log.d(TAG, "onPostExecute: "+response.getTime());
-                                            Log.d(TAG, "onPostExecute: "+response.getData());
-                                        }
-
-                                        @Override
-                                        public void callBackStudentDataException(Exception e) {
-                                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-
-                                    }).execute();
-                                   // studentData=null;
-                                    getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,getStudentFragment).commit();
-                                }
-
-                                @Override
-                                public void callBackException(Exception e) {
-                                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }).execute();
-
-
-                        }
-                    }
-                });
-
-
             }
 
             @Override
@@ -150,7 +93,125 @@ public class UpdateStudentFragment extends Fragment {
                 getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,getStudentFragment).commit();
             }
         });
+             upDataChanges();
+        updatebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(updatename.getText().toString().isEmpty()||updateage.getText().toString().isEmpty()||updatesex.getText().toString().isEmpty()||updatedate.getText().toString().isEmpty()) {
+
+                    Toast.makeText(getContext(), "Please Make Sure you enter all the fields", Toast.LENGTH_SHORT).show();
+
+                }else
+                {
+                    studentData.setData(updateNotes.getText().toString());
+
+                    Log.d("UpdateStudentAsync", student.getName());
+                    Log.d("UpdateStudentAsync", Integer.toString(student.getAge()));
+                    Log.d("UpdateStudentAsync", student.getSex());
+                    Log.d("UpdateStudentAsync", Integer.toString(student.getRollnumber()));
+                    new UpdateStudentAsync(getActivity(), student, new callBackInteface<Student>() {
+                        @Override
+                        public void callBackData(Student response) {
+                            Toast.makeText(getContext(), response.getName() + " details are updated", Toast.LENGTH_SHORT).show();
+                            GetStudentFragment getStudentFragment=new GetStudentFragment();
+                            new CreateAsynchStudentDataUpdate(getActivity(), studentData, new callBackInterfaceUpdateStudentData<StudentData>() {
+                                @Override
+                                public void callBackStudentData(StudentData response) {
+                                    // Toast.makeText(getContext(),"Student Roll Number : "+ " Notes Updated : "+ response.getData(), Toast.LENGTH_SHORT).show();
+                                    Log.d(TAG, "onPostExecute: "+response.getStudentId());
+                                    Log.d(TAG, "onPostExecute: "+response.getTime());
+                                    Log.d(TAG, "onPostExecute: "+response.getData());
+                                }
+
+                                @Override
+                                public void callBackStudentDataException(Exception e) {
+                                    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                            }).execute();
+                            // studentData=null;
+                            getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,getStudentFragment).commit();
+                        }
+
+                        @Override
+                        public void callBackException(Exception e) {
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }).execute();
 
 
+                }
+            }
+        });
     }
+
+    private void upDataChanges() {
+        updatename.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    if(!updatename.getText().toString().equals(student.getName()))
+                    {
+                        student.setName(updatename.getText().toString());
+                    }else
+                    {
+                        updatename.selectAll();
+                    }
+                }
+
+            }
+        });
+        updateage.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    if(! updateage.getText().toString().equals(student.getAge()))
+                    {
+                        student.setAge(Integer.parseInt(updateage.getText().toString()));
+                    }else
+                    {
+                        updateage.selectAll();
+                    }
+                }
+
+            }
+        });
+        updatesex.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    if(! updatesex.getText().toString().equals(student.getSex()))
+                    {
+                        student.setSex(updatesex.getText().toString());
+                    }else
+                    {
+                        updatesex.selectAll();
+                    }
+                }
+
+            }
+        });
+
+        updatedate.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus)
+                {
+                    if(! updatedate.getText().toString().equals(student.getDate()))
+                    {
+                        student.setDate(updatedate.getText().toString());
+                    }else
+                    {
+                        updatedate.selectAll();
+                    }
+                }
+
+            }
+        });
+    }
+
+
 }

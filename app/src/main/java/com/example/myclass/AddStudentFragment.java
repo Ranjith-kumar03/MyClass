@@ -27,7 +27,7 @@ public class AddStudentFragment extends Fragment {
 
     View view;
     TextInputEditText addname,addage,adddate;
-    Button addbutton;
+    Button addbutton,cancelbutton;
     GetStudentFragment getStudent=new GetStudentFragment();
     AutoCompleteTextView addsex;
 
@@ -49,6 +49,7 @@ public class AddStudentFragment extends Fragment {
         addsex=view.findViewById(R.id.addsex);
         adddate=view.findViewById(R.id.adddate);
         addbutton=view.findViewById(R.id.addbutton);
+        cancelbutton=view.findViewById(R.id.cancelbutton);
         String [] gender={"Male","Female","DoesNotWantToIdentify"};
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_list_item_1, gender);
@@ -90,6 +91,13 @@ public class AddStudentFragment extends Fragment {
 
                 }
 
+            }
+        });
+        cancelbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetStudentFragment getStudentFragment=new GetStudentFragment();
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,getStudentFragment).commit();
             }
         });
 

@@ -58,8 +58,14 @@ public class StudentNotesFragment extends Fragment {
                     for (StudentwithData x : response) {
 
                         sb.append("Student Name : "+ x.getStudent().getName().toString()+"\n"+"\n");
-                        for(StudentData y:x.getStudentData) {
-                            sb.append("Date : " + y.getTime() + "\n" + "Added Notes : " + y.getData() + "\n" + "\n");
+                        if(x.getStudentData.size()!=0) {
+                            for (StudentData y : x.getStudentData) {
+
+                                sb.append("Date : " + y.getTime() + "\n" + "Added Notes : " + y.getData() + "\n" + "\n");
+                            }
+                        }else
+                        {
+                            Toast.makeText(getContext(), "No Data About that Student is Added  Thankyou", Toast.LENGTH_SHORT).show();
                         }
 
 

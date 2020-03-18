@@ -2,6 +2,7 @@ package com.example.myclass.Model;
 
 import androidx.room.Embedded;
 import androidx.room.Relation;
+import androidx.room.Transaction;
 
 import java.util.List;
 

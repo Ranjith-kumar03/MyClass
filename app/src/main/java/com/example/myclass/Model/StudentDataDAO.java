@@ -3,6 +3,7 @@ package com.example.myclass.Model;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
@@ -15,8 +16,9 @@ public interface StudentDataDAO {
     @Update
     void updateStudentData(StudentData studentData);
 
+    @Transaction
     @Query("SELECT * FROM Student where rollnumber=:studentIDforData")
-    List<StudentwithData> getStudentData(int studentIDforData);
+       List<StudentwithData> getStudentData(int studentIDforData);
 
 
 }
