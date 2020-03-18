@@ -23,7 +23,7 @@ import com.example.myclass.Repository.callBackInteface;
 public class StudentDetailFragment extends Fragment {
     View view;
     TextView studentDetID,Detname,Detage,Detsex,Detdate;
-    Button upDatebutton,cancelbutton;
+    Button upDatebutton,cancelbutton,getStudentInfobutton;
     int curItem;
 
     public StudentDetailFragment() {
@@ -50,6 +50,8 @@ public class StudentDetailFragment extends Fragment {
 
         upDatebutton= view.findViewById(R.id.upDatebutton);
         cancelbutton= view.findViewById(R.id.cancelbutton);
+        getStudentInfobutton= view.findViewById(R.id.getStudentInfobutton);
+
 
                 new GetStudentByIDAsync(getActivity(), curItem, new callBackInteface<Student>() {
                     @Override
@@ -83,6 +85,17 @@ public class StudentDetailFragment extends Fragment {
                 UpdateStudentFragment updateStudentFragment=new UpdateStudentFragment();
                 updateStudentFragment.setArguments(bundle);
                 getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,updateStudentFragment).commit();
+            }
+        });
+
+        getStudentInfobutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("currentSelected",curItem);
+                StudentNotesFragment studentNotesFragment=new StudentNotesFragment();
+                studentNotesFragment.setArguments(bundle);
+                getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,studentNotesFragment).commit();
             }
         });
             }

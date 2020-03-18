@@ -5,7 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".StudentDetailFragment">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp">
     <TextView
         android:id="@+id/studentDetID"
         android:layout_width="match_parent"
@@ -114,9 +121,26 @@
             android:textColor="#ffffff" />
 
 
+
     </LinearLayout>
 
+    <Button
+        android:id="@+id/getStudentInfobutton"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="5dp"
 
-
+        android:layout_marginBottom="30dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Get Student Notes"
+        android:textColor="#ffffff" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -74,7 +74,7 @@ public class AddStudentFragment extends Fragment {
 
                         @Override
                         public void callBackData(Student response) {
-                            Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(), response.toString(), Toast.LENGTH_SHORT).show();
                             getFragmentManager().beginTransaction().replace(R.id.fragmentContainer,getStudent).commit();
                         }
 

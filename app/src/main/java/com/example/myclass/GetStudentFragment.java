@@ -59,7 +59,7 @@ public class GetStudentFragment extends Fragment {
                     sb.append(response.get(i).getName());
 
                 }
-                Toast.makeText(getActivity(), sb, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), sb, Toast.LENGTH_SHORT).show();
                 adapter=new StudentAdapter(response,getActivity());
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
